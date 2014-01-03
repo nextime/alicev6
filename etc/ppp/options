@@ -1,0 +1,8 @@
+asyncmap 0
+auth
+crtscts
+lock
+modem
+lcp-echo-interval 30
+lcp-echo-failure 4
+noipx

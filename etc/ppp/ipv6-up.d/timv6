@@ -1,0 +1,17 @@
+#!/bin/sh
+TIMV6="ppp2"
+if [ "$PPP_IFACE" = "$TIMV6" ] ; then
+   sysctl -w net.ipv6.conf.$PPP_IFACE.forwarding=1
+   #sysctl -w net.ipv6.conf.$PPP_IFACE.accept_ra=2
+   sysctl -w net.ipv6.conf.$PPP_IFACE.autoconfig=0
+   V6=`rdisc6 -1 -q ppp2`
+   V6=`echo $V6 | cut -d ' ' -f 1`
+   CV6=`echo $V6 | cut -d '/' -f 1`
+   PV6=`echo $V6 | cut -d '/' -f 2`
+
+   ip -6 addr add "${CV6}2/${PV6}" dev eth1
+   ip -6 addr add "${CV6}1/128" dev $PPP_IFACE
+   ip -6 route add default  dev ppp2
+   sed -e "s/TIMPREFIX/${CV6}\/${PV6}/g" /etc/radvd.conf_tim_template > /etc/radvd.conf
+   /etc/init.d/radvd restart
+fi

@@ -1,0 +1,11 @@
+noipdefault
+show-password
+debug
+noauth
+persist
+plugin rp-pppoe.so eth0
+user "adsl@alice6.it"
+name "adsl@alice6.it"
+unit 2
++ipv6 
+ipv6cp-use-persistent
