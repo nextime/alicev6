@@ -1,3 +1,5 @@
+# REPOSITORY MOVED TO https://git.nexlab.net/nextime/alicev6
+
 alicev6
 =======
 
